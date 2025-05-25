@@ -1,0 +1,10 @@
+# Java compiled class files
+*.class
+
+# IDE directories 
+bin/
+.vscode/
+
+# JAR files
+*.jar
+
