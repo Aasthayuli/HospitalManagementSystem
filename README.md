@@ -6,9 +6,6 @@ A desktop-based Hospital Management System developed in **Java** with a **MySQL*
 
 - 🧑‍⚕️ **Patient Management**: Add, update, view, and delete patient records.
 - 👨‍⚕️ **Doctor Management**: Maintain doctor information and availability.
-- 📅 **Appointments**: Schedule and manage patient appointments.
-- 🧾 **Billing System**: Generate bills for patients with itemized services.
-- 📊 **Reports**: Generate and export summary reports.
 - 🔐 **User Authentication**: Secure login system for administrators/staff.
 
 ## 🛠️ Technologies Used
