@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import net.proteanit.sql.DbUtils;
@@ -50,7 +51,10 @@ public class SearchRoom extends JFrame {
         table.setBounds(5, 187, 700, 210);
         table.setBackground(new Color(95, 153, 174));
         table.setForeground(Color.white);
-        panel.add(table);
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(5, 187, 680, 210);
+        panel.add(scrollPane);
 
         try {
 
@@ -81,7 +85,7 @@ public class SearchRoom extends JFrame {
         price.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(price);
 
-        JLabel Bed = new JLabel("Bed Type");
+        JLabel Bed = new JLabel("Room Type");
         Bed.setBounds(530, 162, 150, 20);
         Bed.setForeground(Color.white);
         Bed.setFont(new Font("Tahoma", Font.BOLD, 14));

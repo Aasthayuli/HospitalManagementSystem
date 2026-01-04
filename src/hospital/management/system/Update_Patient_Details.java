@@ -34,71 +34,70 @@ public class Update_Patient_Details extends JFrame {
         panel.add(label);
 
         JLabel label1 = new JLabel("Update Patient Details");
-        label1.setBounds(124, 11, 260, 25);
+        label1.setBounds(124, 50, 260, 25);
         label1.setFont(new Font("Tahoma", Font.BOLD, 20));
         label1.setForeground(Color.WHITE);
         panel.add(label1);
 
-        JLabel label2 = new JLabel("Name: ");
-        label2.setBounds(25, 88, 60, 14);
+        JLabel label2 = new JLabel("Patient ");
+        label2.setBounds(25, 130, 60, 14);
         label2.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
         panel.add(label2);
 
         Choice choice = new Choice();
-        choice.setBounds(248, 85, 100, 25);
+        choice.setBounds(248, 130, 150, 25);
         panel.add(choice);
-
         try {
 
             conn c = new conn();
-            String q = "select * from PATIENT_INFO";
+            String q = "SELECT patient_id, name FROM patient_info";
             ResultSet rs = c.statement.executeQuery(q);
             while (rs.next()) {
-                choice.add(rs.getString("NAME"));
+                choice.add(rs.getString("patient_id") + " - " + rs.getString("name"));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        JLabel label3 = new JLabel("Update Patient Details:");
-        label3.setBounds(25, 129, 260, 25);
+        JLabel label3 = new JLabel("Update Patient Room no.:");
+        label3.setBounds(25, 174, 260, 25);
         label3.setFont(new Font("Tahoma", Font.PLAIN, 16));
         panel.add(label3);
 
         JTextField textFieldR = new JTextField();
-        textFieldR.setBounds(248, 129, 140, 20);
+        textFieldR.setBounds(248, 174, 140, 20);
         panel.add(textFieldR);
 
-        JLabel label4 = new JLabel("In-Time: ");
-        label4.setBounds(25, 174, 100, 14);
+        JLabel label4 = new JLabel("Check-in Time: ");
+        label4.setBounds(25, 216, 160, 14);
         label4.setFont(new Font("Tahoma", Font.PLAIN, 16));
         panel.add(label4);
 
         JTextField textFieldINTime = new JTextField();
-        textFieldINTime.setBounds(248, 174, 140, 20);
+        textFieldINTime.setBounds(248, 216, 140, 20);
         panel.add(textFieldINTime);
 
         JLabel label5 = new JLabel("Amount Paid(Rs): ");
-        label5.setBounds(25, 216, 140, 14);
+        label5.setBounds(25, 261, 140, 14);
         label5.setFont(new Font("Tahoma", Font.PLAIN, 16));
         panel.add(label5);
 
         JTextField textFieldAmount = new JTextField();
-        textFieldAmount.setBounds(248, 216, 140, 20);
+        textFieldAmount.setBounds(248, 261, 140, 20);
         panel.add(textFieldAmount);
 
         JLabel label6 = new JLabel("Pending Amount(Rs): ");
-        label6.setBounds(25, 261, 160, 20);
+        label6.setBounds(25, 300, 160, 20);
         label6.setFont(new Font("Tahoma", Font.PLAIN, 16));
         panel.add(label6);
 
         JTextField textFieldPending = new JTextField();
-        textFieldPending.setBounds(248, 261, 140, 20);
+        textFieldPending.setBounds(248, 300, 140, 20);
         panel.add(textFieldPending);
 
         JButton update = new JButton("UPDATE");
-        update.setBounds(70, 378, 100, 23);
+        update.setBounds(70, 400, 100, 23);
         update.setFont(new Font("Tahoma", Font.PLAIN, 16));
         update.setBackground(Color.BLACK);
         update.setForeground(Color.WHITE);
@@ -109,12 +108,16 @@ public class Update_Patient_Details extends JFrame {
                 try {
 
                     conn c = new conn();
-                    String q = choice.getSelectedItem();
+                    String selected = choice.getSelectedItem();
+                    String patientId = selected.split(" - ")[0].trim();
                     String room = textFieldR.getText();
                     String time = textFieldINTime.getText();
                     String amount = textFieldAmount.getText();
-                    c.statement.executeUpdate("update PATIENT_INFO set Room_Number='" + room + "',Time='" + time
-                            + "',Deposite='" + amount + "' where name ='" + q + "'");
+                    c.statement.executeUpdate("UPDATE patient_info SET room_no='" + room +
+                            "', admit_time='" + time +
+                            "', deposit='" + amount +
+                            "' WHERE patient_id='" + patientId + "'");
+
                     JOptionPane.showMessageDialog(null, "Updated Successfully");
                     setVisible(false);
 
@@ -125,7 +128,7 @@ public class Update_Patient_Details extends JFrame {
         });
 
         JButton back = new JButton("BACK");
-        back.setBounds(181, 378, 89, 23);
+        back.setBounds(181, 400, 89, 23);
         back.setFont(new Font("Tahoma", Font.PLAIN, 16));
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);
@@ -138,7 +141,7 @@ public class Update_Patient_Details extends JFrame {
         });
 
         JButton check = new JButton("CHECK");
-        check.setBounds(281, 378, 89, 23);
+        check.setBounds(281, 400, 89, 23);
         check.setFont(new Font("Tahoma", Font.PLAIN, 16));
         check.setBackground(Color.BLACK);
         check.setForeground(Color.WHITE);
@@ -146,25 +149,27 @@ public class Update_Patient_Details extends JFrame {
         check.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                String id = choice.getSelectedItem();
-                String q = "select * from PATIENT_INFO where NAME='" + id + "'";
+                String patientId = choice.getSelectedItem().split(" - ")[0].trim();
+                String q = "select * from patient_info where patient_id='" + patientId + "'";
                 try {
 
                     conn c = new conn();
                     ResultSet rs = c.statement.executeQuery(q);
                     while (rs.next()) {
-                        textFieldR.setText(rs.getString("Room_Number"));
-                        textFieldINTime.setText(rs.getString("Time"));
-                        textFieldAmount.setText(rs.getString("Deposite"));
+                        textFieldR.setText(rs.getString("room_no"));
+                        textFieldINTime.setText(rs.getString("admit_time"));
+                        textFieldAmount.setText(rs.getString("deposit"));
 
                     }
 
                     ResultSet rs1 = c.statement
                             .executeQuery("select * from room where room_no='" + textFieldR.getText() + "'");
                     while (rs1.next()) {
-                        String price = rs1.getString("Price");
-                        int amountPaid = Integer.parseInt(price) - Integer.parseInt(textFieldAmount.getText());
-                        textFieldPending.setText("" + amountPaid);
+                        String price = rs1.getString("price");
+                        double priceVal = Double.parseDouble(price);
+                        double depositVal = Double.parseDouble(textFieldAmount.getText());
+                        double pending = priceVal - depositVal;
+                        textFieldPending.setText(String.format("%.2f", pending));
 
                     }
                 } catch (Exception e) {

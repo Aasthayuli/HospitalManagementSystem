@@ -5,8 +5,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -41,10 +41,10 @@ public class Patient_Discharge extends JFrame {
         try {
 
             conn c = new conn();
-            String q = "select * from PATIENT_INFO";
+            String q = "SELECT patient_id FROM patient_info";
             ResultSet rs = c.statement.executeQuery(q);
             while (rs.next()) {
-                choice.add(rs.getString("number"));
+                choice.add(rs.getString("patient_id"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,9 +75,7 @@ public class Patient_Discharge extends JFrame {
         label5.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(label5);
 
-        Date date = new Date();
-
-        JLabel OUTTime = new JLabel("" + date);
+        JLabel OUTTime = new JLabel("" + java.time.LocalDateTime.now());
         OUTTime.setBounds(200, 230, 210, 20);
         OUTTime.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(OUTTime);
@@ -92,11 +90,19 @@ public class Patient_Discharge extends JFrame {
 
                 conn c = new conn();
                 try {
-                    c.statement.executeUpdate(
-                            "delete from PATIENT_INFO where number= '" + choice.getSelectedItem() + "'");
+                    String roomNo = RN.getText();
+                    int patientId = Integer.parseInt(choice.getSelectedItem());
+                    // Room availability update
+                    PreparedStatement ps1 = c.connection.prepareStatement(
+                            "UPDATE room SET availability='Available' WHERE room_no=?");
+                    ps1.setString(1, roomNo);
+                    ps1.executeUpdate();
 
-                    c.statement.executeUpdate(
-                            "update room set Availability='Available' where room_no= '" + RN.getText() + "'");
+                    // Patient delete
+                    PreparedStatement ps2 = c.connection.prepareStatement(
+                            "DELETE FROM patient_info WHERE patient_id=?");
+                    ps2.setInt(1, patientId);
+                    ps2.executeUpdate();
 
                     JOptionPane.showMessageDialog(null, "Successfully Discharged");
                     setVisible(false);
@@ -117,12 +123,13 @@ public class Patient_Discharge extends JFrame {
 
                 conn c = new conn();
                 try {
-
+                    int patientId = Integer.parseInt(choice.getSelectedItem());
                     ResultSet rs = c.statement.executeQuery(
-                            "select * from PATIENT_INFO where number= '" + choice.getSelectedItem() + "'");
+                            "SELECT room_no, admit_time FROM patient_info WHERE patient_id = "
+                                    + patientId);
                     while (rs.next()) {
-                        RN.setText(rs.getString("Room_Number"));
-                        INTime.setText(rs.getString("Time"));
+                        RN.setText(rs.getString("room_no"));
+                        INTime.setText(rs.getString("admit_time"));
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

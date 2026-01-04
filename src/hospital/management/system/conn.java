@@ -13,10 +13,10 @@ public class conn {
         String user = "root";
         String pass = "Mysqlp@ss23";
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital_management_system", user,
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital_management", user,
                     pass);
             statement = connection.createStatement();
-            System.out.println("Connected");
+            // System.out.println("Connected");
         } catch (Exception e) {
             e.printStackTrace();
 

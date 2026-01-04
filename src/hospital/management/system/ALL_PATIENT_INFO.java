@@ -37,52 +37,46 @@ public class ALL_PATIENT_INFO extends JFrame {
         label1.setForeground(Color.WHITE);
         panel.add(label1);
 
-        JLabel label2 = new JLabel("Number");
-        label2.setBounds(125, 11, 100, 16);
+        JLabel label2 = new JLabel("Name");
+        label2.setBounds(145, 11, 100, 16);
         label2.setFont(new Font("Tahoma", Font.BOLD, 14));
         label2.setForeground(Color.WHITE);
         panel.add(label2);
 
-        JLabel label3 = new JLabel("Name");
-        label3.setBounds(235, 11, 100, 16);
+        JLabel label3 = new JLabel("Gender");
+        label3.setBounds(265, 11, 100, 16);
         label3.setFont(new Font("Tahoma", Font.BOLD, 14));
         label3.setForeground(Color.WHITE);
         panel.add(label3);
 
-        JLabel label4 = new JLabel("Gender");
-        label4.setBounds(350, 11, 100, 16);
+        JLabel label4 = new JLabel("Disease");
+        label4.setBounds(400, 11, 100, 16);
         label4.setFont(new Font("Tahoma", Font.BOLD, 14));
         label4.setForeground(Color.WHITE);
         panel.add(label4);
 
-        JLabel label5 = new JLabel("Disease");
-        label5.setBounds(460, 11, 100, 16);
+        JLabel label5 = new JLabel("Room No.");
+        label5.setBounds(530, 11, 100, 16);
         label5.setFont(new Font("Tahoma", Font.BOLD, 14));
         label5.setForeground(Color.WHITE);
         panel.add(label5);
 
-        JLabel label6 = new JLabel("Room No.");
-        label6.setBounds(575, 11, 100, 16);
+        JLabel label6 = new JLabel("Admit time");
+        label6.setBounds(655, 11, 100, 16);
         label6.setFont(new Font("Tahoma", Font.BOLD, 14));
         label6.setForeground(Color.WHITE);
         panel.add(label6);
 
-        JLabel label7 = new JLabel("Date");
-        label7.setBounds(685, 11, 100, 16);
+        JLabel label7 = new JLabel("Deposit");
+        label7.setBounds(785, 11, 100, 16);
         label7.setFont(new Font("Tahoma", Font.BOLD, 14));
         label7.setForeground(Color.WHITE);
         panel.add(label7);
 
-        JLabel label8 = new JLabel("Deposit");
-        label8.setBounds(800, 11, 100, 16);
-        label8.setFont(new Font("Tahoma", Font.BOLD, 14));
-        label8.setForeground(Color.WHITE);
-        panel.add(label8);
-
         try {
 
             conn c = new conn();
-            String q = "select * from Patient_Info";
+            String q = "select * from patient_info";
             ResultSet rs = c.statement.executeQuery(q);
             table.setModel(DbUtils.resultSetToTableModel(rs));
 

@@ -7,14 +7,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Image;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Reception extends JFrame {
+public class StaffDashboard extends JFrame {
 
-    Reception() {
+    StaffDashboard() {
         JPanel panel = new JPanel();
         panel.setLayout(null);
         panel.setBounds(5, 160, 1525, 670);
@@ -34,14 +34,14 @@ public class Reception extends JFrame {
         label.setBounds(0, 0, 190, 170);
         panel1.add(label);
 
-        JLabel heading = new JLabel("Welcome to the Administration Desk.");
-        heading.setBounds(400, 50, 1000, 50);
+        JLabel heading = new JLabel("Welcome to Staff Panel.");
+        heading.setBounds(450, 50, 500, 50);
         heading.setFont(new Font("Tahoma", Font.BOLD, 30));
         heading.setForeground(Color.WHITE);
         panel.add(heading);
 
         JButton btn10 = new JButton("LogOut");
-        btn10.setBounds(1300, 15, 200, 30);
+        btn10.setBounds(1100, 15, 200, 30);
         btn10.setBackground(new Color(246, 215, 118));
         panel1.add(btn10);
         btn10.addActionListener(new ActionListener() {
@@ -50,40 +50,6 @@ public class Reception extends JFrame {
 
                 setVisible(false);
                 new Login();
-            }
-        });
-
-        JButton btn2 = new JButton("Room");
-        btn2.setBounds(1100, 58, 200, 30);
-        btn2.setBackground(new Color(246, 215, 118));
-        panel1.add(btn2);
-        btn2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new Room();
-            }
-        });
-
-        JButton btn3 = new JButton("Department");
-        btn3.setBounds(1100, 100, 200, 30);
-        btn3.setBackground(new Color(246, 215, 118));
-        panel1.add(btn3);
-        btn3.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new Department();
-            }
-        });
-
-        JButton btn4 = new JButton("All Employee Info");
-        btn4.setBounds(1100, 15, 200, 30);
-        btn4.setBackground(new Color(246, 215, 118));
-        panel1.add(btn4);
-        btn4.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                new Employee_Info();
             }
         });
 
@@ -159,10 +125,10 @@ public class Reception extends JFrame {
         setVisible(true);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
     }
 
     public static void main(String[] args) {
-        new Reception();
+        new StaffDashboard();
     }
-
 }

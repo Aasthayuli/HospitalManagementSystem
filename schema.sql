@@ -1,0 +1,14 @@
+create database hospital_management;
+use hospital_management;
+create table login(ID varchar(50) not null primary key, PW varchar(255) not null, role enum('ADMIN', 'STAFF') not null);
+create table emp_info(emp_id int auto_increment primary key, name varchar(50) not null, age int, phone_number varchar(20) unique,salary decimal(10,2), gmail varchar(50) unique, aadhar_number varchar(20) unique, login_id varchar(50), foreign key(login_id) references login(ID));
+desc emp_info;
+create table department(dept_id int auto_increment primary key, name varchar(100) not null unique, phone varchar(20));
+desc department;
+create table room(room_no varchar(20) primary key, availability enum('Available','Occupied') not null default 'Available', price decimal(10,2), room_type varchar(50)); 
+desc room;
+create table patient_info(patient_id int auto_increment primary key, name varchar(50) not null, gender enum('Male', 'Female', 'Other'), disease varchar(100), room_no varchar(20), admit_time datetime default current_timestamp, deposit decimal(10,2), foreign key(room_no) references room(room_no));
+desc patient_info;
+create table ambulance(amb_id int auto_increment primary key, driver_name varchar(50), driver_gender enum('Male', 'Female', 'Other'), car_name varchar(50), available enum('Yes', 'No') default 'Yes', location varchar(100));
+desc ambulance;
+alter table department modify dept_id int auto_increment;

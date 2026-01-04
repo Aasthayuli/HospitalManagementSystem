@@ -120,7 +120,9 @@ public class NEW_PATIENT extends JFrame implements ActionListener {
         c1 = new Choice();
         try {
             conn c = new conn();
-            ResultSet rs = c.statement.executeQuery("select * from Room");
+            ResultSet rs = c.statement.executeQuery(
+                    "SELECT room_no FROM room WHERE availability = 'Available'");
+
             while (rs.next()) {
                 c1.add(rs.getString("room_no"));
             }
@@ -184,52 +186,56 @@ public class NEW_PATIENT extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
         if (e.getSource() == b1) {
-            conn c = new conn();
-            String radioBTN = null;
-            if (r1.isSelected()) {
-                radioBTN = "Male";
-            } else if (r2.isSelected()) {
-                radioBTN = "Female";
+
+            String name = textName.getText();
+
+            String gender = null;
+            if (r1.isSelected())
+                gender = "Male";
+            else if (r2.isSelected())
+                gender = "Female";
+            else {
+                JOptionPane.showMessageDialog(null, "Please select gender");
+                return;
             }
 
-            String s1 = (String) comboBox.getSelectedItem();
-            String s2 = textFieldNumber.getText();
-            String s3 = textName.getText();
-            String s4 = radioBTN;
-            String s5 = textFieldDisease.getText();
-            String s6 = c1.getSelectedItem();
-            String s7 = date.getText();
-            String s8 = textFieldDeposite.getText();
+            String disease = textFieldDisease.getText();
+            String roomNo = c1.getSelectedItem();
+            double deposit = Double.parseDouble(textFieldDeposite.getText());
 
             try {
-                PreparedStatement ps1 = c.connection
-                        .prepareStatement("insert into Patient_Info values(?, ?, ?, ?, ?, ?, ?, ?)");
-                ps1.setString(1, s1);
-                ps1.setString(2, s2);
-                ps1.setString(3, s3);
-                ps1.setString(4, s4);
-                ps1.setString(5, s5);
-                ps1.setString(6, s6);
-                ps1.setString(7, s7);
-                ps1.setString(8, s8);
+                conn c = new conn();
+
+                // Insert patient
+                String insertPatient = "INSERT INTO patient_info (name, gender, disease, room_no, deposit) VALUES (?, ?, ?, ?, ?)";
+                PreparedStatement ps1 = c.connection.prepareStatement(insertPatient);
+
+                ps1.setString(1, name);
+                ps1.setString(2, gender);
+                ps1.setString(3, disease);
+                ps1.setString(4, roomNo);
+                ps1.setDouble(5, deposit);
+
                 ps1.executeUpdate();
 
-                PreparedStatement ps2 = c.connection
-                        .prepareStatement("update room set Availability = 'Occupied' where room_no = ?");
-                ps2.setString(1, s6);
+                // Update room status
+                String updateRoom = "UPDATE room SET availability = 'Occupied' WHERE room_no = ?";
+                PreparedStatement ps2 = c.connection.prepareStatement(updateRoom);
+                ps2.setString(1, roomNo);
                 ps2.executeUpdate();
 
-                JOptionPane.showMessageDialog(null, "Added Successfully !");
+                JOptionPane.showMessageDialog(null, "Patient admitted successfully");
                 setVisible(false);
 
-            } catch (Exception e1) {
-                e1.printStackTrace();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error while admitting patient");
             }
 
         } else {
             setVisible(false);
-
         }
     }
 

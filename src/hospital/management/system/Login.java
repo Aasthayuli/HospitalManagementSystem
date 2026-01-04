@@ -36,13 +36,13 @@ public class Login extends JFrame implements ActionListener {
         add(password);
 
         textField = new JTextField();
-        textField.setBounds(150, 20, 150, 30);
+        textField.setBounds(150, 20, 300, 30);
         textField.setFont(new Font("Tahoma", Font.PLAIN, 16));
         // textField.setBackground(new Color(255, 179, 0));
         add(textField);
 
         passwordField = new JPasswordField();
-        passwordField.setBounds(150, 70, 150, 30);
+        passwordField.setBounds(150, 70, 300, 30);
         passwordField.setFont(new Font("Tahoma", Font.PLAIN, 16));
         // passwordField.setForeground(Color.white);
         add(passwordField);
@@ -71,6 +71,7 @@ public class Login extends JFrame implements ActionListener {
         add(back);
 
         getContentPane().setBackground(new Color(95, 153, 174));
+        setTitle("City Hospital");
         setSize(750, 300);
         setLocation(400, 270);
         setLayout(null);
@@ -94,9 +95,13 @@ public class Login extends JFrame implements ActionListener {
 
                 String q = "select * from login where ID='" + user + "' and PW='" + password + "'";
                 ResultSet rs = c.statement.executeQuery(q);
-
                 if (rs.next()) {
-                    new Reception();
+                    if (rs.getString("role").equals("ADMIN")) {
+                        new Reception();
+                    } else {
+                        new StaffDashboard();
+                    }
+
                     setVisible(false);
                 } else {
                     JOptionPane.showMessageDialog(null, "Invalid Credentials !");

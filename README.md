@@ -23,14 +23,14 @@ A desktop-based Hospital Management System developed in **Java** with a **MySQL*
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/your-username/hospital-management-system.git
+   git clone https://github.com/Aasthayuli/HospitalManagementSystem
    ```
 
 2. Import into your IDE (e.g., Eclipse, IntelliJ)
 
 3. Add External Libraries
 
-- Add mysql-connector-j, jcalendar, and any other .jar files to your build path.
+- Add mysql-connector-j and ResultSet2xml .jar files to your build path.
 
 4. Setup MySQL Database
 
@@ -46,7 +46,7 @@ String password = "your-password";
 
 5. Run the Application
 
-- Start from the main entry class (e.g., Main.java or HospitalManagementSystem.java).
+- Start from the main entry class (e.g., Login.java in the src folder).
 
 ## 📸 Screenshots
 
@@ -55,7 +55,6 @@ String password = "your-password";
 
 ## 💡 Future Enhancements
 
-- Role-based access control
 - SMS/Email appointment reminders
 - Integration with cloud database
 - Export reports to PDF/Excel

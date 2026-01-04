@@ -58,7 +58,7 @@ public class Room extends JFrame {
         label3.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(label3);
 
-        JLabel label4 = new JLabel("Bed type");
+        JLabel label4 = new JLabel("Room type");
         label4.setBounds(385, 15, 80, 15);
         label4.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(label4);
