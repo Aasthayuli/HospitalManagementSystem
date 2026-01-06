@@ -19,7 +19,8 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class NEW_PATIENT extends JFrame implements ActionListener {
 
@@ -140,9 +141,11 @@ public class NEW_PATIENT extends JFrame implements ActionListener {
         labelDate.setFont(new Font("Tahoma", Font.BOLD, 16));
         panel.add(labelDate);
 
-        Date date1 = new Date();
+        LocalDateTime date1 = LocalDateTime.now();
+        DateTimeFormatter format1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String date2 = date1.format(format1);
 
-        date = new JLabel("" + date1);
+        date = new JLabel("" + date2);
         date.setBounds(271, 316, 230, 14);
         date.setForeground(Color.WHITE);
         date.setFont(new Font("Tahoma", Font.BOLD, 14));
