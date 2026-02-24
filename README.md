@@ -1,6 +1,6 @@
 # 🏥 Hospital Management System
 
-A desktop-based Hospital Management System developed in **Java** with a **MySQL** backend. This project is designed to manage and streamline the day-to-day operations of a hospital including patient records, doctor assignments, appointments, billing, and more.
+A desktop-based Hospital Management System developed in **Java** with a **MySQL** backend. This project is designed to manage and streamline the day-to-day operations of a hospital including patient records, doctor, Ambulance, Departments, etc. available.
 
 ## 📌 Features
 
