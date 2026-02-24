@@ -6,7 +6,7 @@ A desktop-based Hospital Management System developed in **Java** with a **MySQL*
 
 - 🧑‍⚕️ **Patient Management**: Add, update, view, and delete patient records.
 - 👨‍⚕️ **Doctor Management**: Maintain doctor information and availability.
-- 🔐 **User Authentication**: Secure login system for administrators/staff.
+- 🔐 **User Authentication**: Role based login - Staffs and Admin
 
 ## 🛠️ Technologies Used
 
@@ -16,7 +16,6 @@ A desktop-based Hospital Management System developed in **Java** with a **MySQL*
 | MySQL              | Backend relational database          |
 | JDBC               | Java-MySQL connectivity              |
 | mysql-connector-j  | Database connector driver            |
-| ResultSet2xml      | For result set data exportation      |
 
 ## ⚙️ Setup Instructions
 
